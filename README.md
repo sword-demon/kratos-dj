@@ -95,3 +95,15 @@ http://localhost:8100/customer/get-verify-code
   "Data": ""
 }
 ```
+
+## go-redis
+
+```bash
+go get github.com/redis/go-redis/v9
+```
+
+## 启动容器
+
+```bash
+docker-compose up -d
+```

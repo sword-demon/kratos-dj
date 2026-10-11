@@ -1,0 +1,8 @@
+services:
+  redis:
+    image: redis
+    container_name: laoma_dj_redis
+    ports:
+      - "36379:6379"
+    volumes:
+      - ./data/redis:/data
