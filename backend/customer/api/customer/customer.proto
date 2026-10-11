@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package api.customer;
+
+// 导入包
+import "google/api/annotations.proto";
+
+option go_package = "customer/api/customer;customer";
+
+service Customer {
+
+	// 获取验证码
+	rpc GetVerifyCode (GetVerifyCodeReq) returns (GetVerifyCodeResp) {
+		option (google.api.http) = {
+			get: "/customer/get-verify-code/{telephone}"
+		};
+	}
+}
+
+message GetVerifyCodeReq {
+	string telephone = 1; // 手机号码
+}
+message GetVerifyCodeResp {
+	int32 code = 1; // 处理结果
+	string message = 2; // 错误消息
+	string verify_code = 3; // 返回真正获取到的验证码的信息
+	int64 verify_code_time = 4; // 时间戳
+	int32 verify_code_life = 5; // 验证码有效期
+}
