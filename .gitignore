@@ -1,0 +1,188 @@
+# =========================
+# OS / Editor / IDE
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.swp
+*.swo
+*~
+*.iml
+*.code-workspace
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+*.secret
+secrets/
+
+# Certificates / keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+
+# =========================
+# Logs / Runtime files
+# =========================
+logs/
+log/
+*.log
+*.log.*
+*.pid
+*.seed
+*.tmp
+tmp/
+temp/
+
+# =========================
+# Go / Kratos backend
+# =========================
+# Build outputs
+/bin/
+/build/
+/dist/
+/out/
+/release/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.prof
+*.cover
+coverage.out
+coverage.html
+
+# Go workspace/cache generated locally
+go.work
+go.work.sum
+.gocache/
+.gomodcache/
+
+# Dependency vendoring is usually generated; remove this if you commit vendor/
+vendor/
+
+# Kratos service local configs; keep templates/examples in git
+configs/*.local.*
+configs/*local*
+backend/**/configs/*.local.*
+backend/**/configs/*local*
+consumer/**/configs/*.local.*
+driver/**/configs/*.local.*
+manager/**/configs/*.local.*
+manager/**/configs/*local*
+
+# Kratos / microservice generated runtime artifacts
+*.pb.tmp
+*.swagger.tmp
+
+# OpenAPI/Swagger generated files (local generation only)
+openapi.swagger.json
+openapi-*.json
+*.swagger.json
+
+# Debugger files
+.dlv/
+*.debug
+
+# =========================
+# Frontend separated projects (Vue/React/Vite/Next/Nuxt)
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Package-manager caches
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.npm/
+
+# Frontend build/cache outputs
+dist/
+build/
+.output/
+.nuxt/
+.next/
+.vite/
+.cache/
+.parcel-cache/
+coverage/
+*.tsbuildinfo
+
+# Environment files for frontend
+.env.local
+.env.*.local
+
+# =========================
+# Docker / Compose local overrides & volumes
+# =========================
+docker-compose.override.yml
+compose.override.yml
+.docker/
+docker-data/
+volumes/
+
+# =========================
+# Database / MQ / middleware local data
+# =========================
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.rdb
+*.aof
+
+# =========================
+# Uploads / generated assets
+# =========================
+uploads/
+storage/
+static/uploads/
+public/uploads/
+
+# =========================
+# Misc
+# =========================
+*.bak
+*.orig
+*.rej
+*.patch
+*.diff
+*.out
+*.mod.bak
+go.mod.bak
+
+# IDEs and editors specific files
+.devcontainer/
+.vscode/.history/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp.*
+.~*
+*.autosave
