@@ -1,13 +1,25 @@
 # =========================
 # OS / Editor / IDE
 # =========================
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+# Windows
 Thumbs.db
+ehthumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
 .idea/
+# VSCode: ignore folder contents but keep shared config files in version control.
+# Use ".vscode/*" (not ".vscode/") because Git does not re-include files whose
+# parent directory has been excluded; the wildcard keeps the directory itself
+# visible so the `!file` overrides below actually take effect.
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
@@ -28,15 +40,19 @@ Desktop.ini
 !.env.*.example
 *.local
 *.secret
+*.secret.*
 secrets/
+**/secrets/
 
-# Certificates / keys
+# Certificates / keys / keystores (never commit private material)
 *.pem
 *.key
 *.crt
+*.csr
 *.p12
 *.pfx
 *.jks
+*.keystore
 
 # =========================
 # Logs / Runtime files
@@ -66,38 +82,43 @@ temp/
 *.so
 *.dylib
 *.test
+*.test.exe
 *.prof
+*.pprof
+*.stack
 *.cover
 coverage.out
 coverage.html
+coverage.txt
+**/coverage.out
+**/coverage.html
+**/coverage.txt
 
 # Go workspace/cache generated locally
 go.work
 go.work.sum
 .gocache/
 .gomodcache/
+.golangci-cache/
+.cache/
 
 # Dependency vendoring is usually generated; remove this if you commit vendor/
-vendor/
+# vendor/
 
-# Kratos service local configs; keep templates/examples in git
-configs/*.local.*
-configs/*local*
-backend/**/configs/*.local.*
-backend/**/configs/*local*
-consumer/**/configs/*.local.*
-driver/**/configs/*.local.*
-manager/**/configs/*.local.*
-manager/**/configs/*local*
+# Kratos service local configs; keep templates/examples in git.
+# Single glob covers backend/, consumer/, driver/, manager/ service trees.
+**/configs/*.local.*
+**/configs/*local*
 
 # Kratos / microservice generated runtime artifacts
 *.pb.tmp
 *.swagger.tmp
-
-# OpenAPI/Swagger generated files (local generation only)
+*.swagger.json
 openapi.swagger.json
 openapi-*.json
-*.swagger.json
+
+# kratos run / kratos run dev leftovers
+kratos-run.log
 
 # Debugger files
 .dlv/
@@ -141,6 +162,7 @@ coverage/
 # Docker / Compose local overrides & volumes
 # =========================
 docker-compose.override.yml
+docker-compose.local.yml
 compose.override.yml
 .docker/
 docker-data/
