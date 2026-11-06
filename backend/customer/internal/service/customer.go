@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"customer/api/verifyCode"
+	"customer/internal/data"
 	"regexp"
 	"time"
 
@@ -13,15 +14,17 @@ import (
 
 type CustomerService struct {
 	pb.UnimplementedCustomerServer
+	cd *data.CustomerData
 }
 
-func NewCustomerService() *CustomerService {
-	return &CustomerService{}
+func NewCustomerService(cd *data.CustomerData) *CustomerService {
+	return &CustomerService{cd: cd}
 }
 
 // GetVerifyCode 获取验证码 - 业务逻辑实现
 // 1. 校验号码,保证 telephone 满足手机的格式,使用正则验证
 // 2. 请求验证码服务获取验证码, 和验证码服务进行通信
+// 3. redis 的临时存储 需要一个 redis 的客户端 使用 go-redis 的客户端来完成
 func (s *CustomerService) GetVerifyCode(ctx context.Context, req *pb.GetVerifyCodeReq) (*pb.GetVerifyCodeResp, error) {
 	// 1. 校验手机号
 	pattern := `^1[3-9]\d{9}$`
@@ -68,10 +71,18 @@ func (s *CustomerService) GetVerifyCode(ctx context.Context, req *pb.GetVerifyCo
 		}, err
 	}
 
+	const life = 60
+	if err := s.cd.SetVerifyCode(req.Telephone, reply.Code, life); err != nil {
+		return &pb.GetVerifyCodeResp{
+			Code:    1,
+			Message: "验证码存储错误(redis set 操作错误)",
+		}, err
+	}
+
 	return &pb.GetVerifyCodeResp{
 		Code:           0,
 		VerifyCode:     reply.Code,
 		VerifyCodeTime: time.Now().Unix(),
-		VerifyCodeLife: 60, // 给前端进行倒计时的
+		VerifyCodeLife: life, // 给前端进行倒计时的
 	}, nil
 }
