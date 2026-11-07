@@ -6,3 +6,14 @@ services:
       - "36379:6379"
     volumes:
       - ./data/redis:/data
+
+  mysql:
+    container_name: laoma_dj_mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin888
+      MYSQL_DATABASE: laoma_dj_customer
+    ports:
+      - "43306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
